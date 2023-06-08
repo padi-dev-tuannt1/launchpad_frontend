@@ -7,10 +7,10 @@ import React, { useState } from "react";
 // import { NumberField } from "../FormField";
 // import ProgressBar from "../Modal/ProgressBar";
 // import PoolCountdown from "../Utils/poolCountdown";
-import { useApplicationContext } from "@/context/ApplicationContext";
-import { usePoolContext } from "@/context/PoolContext";
+import { useApplicationContext } from "@/context/applicationContext";
+import { usePoolContext } from "@/context/poolContext";
 import { ethers } from "ethers";
-import {web3} from "web3"
+import { web3 } from "web3"
 
 const BuyTokenCard = (props) => {
     // const { account, library } = useWeb3React();
@@ -261,7 +261,7 @@ const BuyTokenCard = (props) => {
                     " " +
                     baseCurrencySymbol
                 } */}
-                {ethAmount? ethAmount:0}
+                {ethAmount ? ethAmount : 0}
             </div>
         </div>
     );

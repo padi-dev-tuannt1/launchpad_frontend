@@ -1,9 +1,10 @@
 import BigNumber from "bignumber.js";
 import React, { useEffect, useState } from "react";
-import { usePoolContext } from "@/context/PoolContext";
+import { usePoolContext } from "@/context/poolContext";
 import LongLocker from "../Card/longLocker";
+import { utils } from "../../utils"
 const LockerList = (props) => {
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(1);
   const [loading, setLoading] = useState(false);
   const [lockersAddresses, setLockersAddresses] = useState([])
 
@@ -34,7 +35,7 @@ const LockerList = (props) => {
           style={{ flexWrap: "wrap", marginTop: 20 }}
         >
           {lockersAddresses.map((lockerAddress, index) => {
-            console.log(lockerAddress,index)
+            console.log(lockerAddress, index)
             if (index >= limit) {
 
               return null;

@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { useApplicationContext } from '@/context/ApplicationContext'
+import { useApplicationContext } from '@/context/applicationContext'
 const Footer = () => {
-  const {IDOFactoryAddress,TokenLockerFactoryAddress} = useApplicationContext()
+  const { IDOFactoryAddress, TokenLockerFactoryAddress } = useApplicationContext()
   return (
     <div>
       <h2>Contract addresses</h2>

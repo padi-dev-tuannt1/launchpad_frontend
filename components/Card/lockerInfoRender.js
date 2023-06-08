@@ -1,20 +1,20 @@
 import BigNumber from "bignumber.js";
 import React, { useState } from "react";
 import Countdown from "react-countdown";
-import { useApplicationContext } from "@/context/ApplicationContext";
-import { usePoolContext } from "@/context/PoolContext";
+import { useApplicationContext } from "@/context/applicationContext";
+import { usePoolContext } from "@/context/poolContext";
 // import { useLockerContract } from "../../hooks/useContract";
 // import Loader from "../Loader";
 
 const LockerInfoRender = (props) => {
   const { lockerAddress } = props;
   const [loading, setLoading] = useState(false);
-  const account ="0x3421342"
-//   const {
-//     triggerUpdateAccountData,
-//   } = useApplicationContext();
+  const account = "0x3421342"
+  //   const {
+  //     triggerUpdateAccountData,
+  //   } = useApplicationContext();
 
-//   const LockerContract = useLockerContract(lockerAddress, true)
+  //   const LockerContract = useLockerContract(lockerAddress, true)
 
   const poolContext = usePoolContext();
   let lockerInfo = poolContext.allLocker[lockerAddress];
@@ -25,30 +25,30 @@ const LockerInfoRender = (props) => {
 
   const time = new Date(parseInt(lockerInfo.time) * 1000);
 
-//   const withdraw = async () => {
-//     setLoading(true);
+  //   const withdraw = async () => {
+  //     setLoading(true);
 
-//     try {
-//       const tx = await LockerContract.withdrawTokenAll({
-//         from: account,
-//       });
+  //     try {
+  //       const tx = await LockerContract.withdrawTokenAll({
+  //         from: account,
+  //       });
 
-//       await tx.wait();
+  //       await tx.wait();
 
-//       triggerUpdateAccountData();
-//       // TODO: add trigger for update lockerInfo after withdraw
-//     } catch (error) {
-//       console.log('locker withdraw Error', )
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-const withdraw = () =>{
+  //       triggerUpdateAccountData();
+  //       // TODO: add trigger for update lockerInfo after withdraw
+  //     } catch (error) {
+  //       console.log('locker withdraw Error', )
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  const withdraw = () => {
 
-}
+  }
 
   return (
-    <div  style={{ margin: 10, minWidth: 400 }}>
+    <div style={{ margin: 10, minWidth: 400 }}>
       <div
         style={{
           flex: 3,
@@ -120,7 +120,7 @@ const withdraw = () =>{
                 withdraw();
               }}
             >
-              {loading ? "<Loader />" : "WITHDRAW" }
+              {loading ? "<Loader />" : "WITHDRAW"}
             </button>
           </div>
         ) : null}

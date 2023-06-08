@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import React from "react";
 import Countdown from "react-countdown";
 import Link from "next/link";
-import { usePoolContext } from "@/context/PoolContext";
+import { usePoolContext } from "@/context/poolContext";
 
 const LongLocker = (props) => {
   const { lockerAddress } = props;

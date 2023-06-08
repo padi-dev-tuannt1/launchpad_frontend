@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PoolInfoRender from "@/components/Card/PoolInfoRender";
 // import IDOAction from "../components/Modal/idoActionModal";
-import { usePoolContext } from '@/context/PoolContext';
+import { usePoolContext } from '@/context/poolContext';
 import { useSearchParams } from 'next/navigation';
 import IDOAction from "@/components/Modal/idoActionModal";
 // import { useIDOPoolContract } from "../hooks/useContract";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PoolRender from '../Card/PoolRender';
-import { usePoolContext } from '@/context/PoolContext';
+import { usePoolContext } from '@/context/poolContext';
 
 const IDOList = (props) => {
   const [limit, setLimit] = useState(5);

@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import { Navbar, Container, Footer } from "../components/componentsindex"
-import { ApplicationContextProvider } from '@/context/ApplicationContext';
-import { PoolContextProvider } from '@/context/PoolContext';
+import { ApplicationContextProvider } from '@/context/applicationContext';
+import { PoolContextProvider } from '@/context/poolContext';
 const MyApp = ({ Component, pageProps }) => (
   <div>
     <ApplicationContextProvider>

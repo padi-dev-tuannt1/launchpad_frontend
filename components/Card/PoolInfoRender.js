@@ -3,7 +3,7 @@ import React from "react";
 // import { Badge } from "react-bootstrap";
 // import { ETHER } from "../../constants";
 // import { useApplicationContext } from "../../context/applicationContext";
-import { usePoolContext } from "@/context/PoolContext";
+import { usePoolContext } from "@/context/poolContext";
 
 // import { getRouterName } from "../../utils/utils";
 // import TokenInfo from "./tokenInfo";
