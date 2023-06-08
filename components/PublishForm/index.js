@@ -1,7 +1,6 @@
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
-import { useWeb3React } from "@web3-react/core";
 import React from "react";
 // import { useForm } from "react-hook-form";
 // import { useStoreContext } from "../../../context/store";
@@ -14,11 +13,11 @@ function getSteps() {
   return ["Token verify", "IDO information", "Project information", "Submit"];
 }
 
-export default function PublishForm() {
-  const { account } = useWeb3React();
+const PublishForm = () => {
+  const account = "0x"
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-  const context = useStoreContext();
+  // const context = useStoreContext();
 
   if (!account) {
     return null;
@@ -36,8 +35,9 @@ export default function PublishForm() {
     setActiveStep(0);
   };
 
-  const handleSubmit = (data) => {
-    console.log(data);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
     // if (activeStep === 0) {
     //   if (!context.tokenFormValidate()) {
     //     return false;
@@ -124,3 +124,4 @@ export default function PublishForm() {
     </div>
   );
 }
+export default PublishForm

@@ -4,17 +4,19 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
 import { utils } from "../../../utils";
 
-export default function TokenVerify() {
+const TokenVerify = () => {
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState("")
+  const [tokenInformation, setTokenInformation] = useState("")
 
   useEffect(() => {
 
     const fetchTokenInfo = async () => {
-      if (address[0] && library?.web3) {
+      if (address) {
         setLoading(true)
         try {
-          const token = await utils.getTokenData(address[0], library.web3);
-          tokenInformation[1](token);
+          const token = await utils.getTokenData(address);
+          setTokenInformation(token);
         } catch (error) {
           console.log(error)
         } finally {
@@ -25,7 +27,7 @@ export default function TokenVerify() {
 
     fetchTokenInfo();
 
-  }, [address[0], library]);
+  }, [address]);
 
   return (
     <div >
@@ -34,29 +36,29 @@ export default function TokenVerify() {
         id="tokenAddress"
         onChange={(e) => {
           e.preventDefault();
-          address[1](e.target.value);
+          setAddress(e.target.value);
         }}
-        value={tokenInformation?.[0]?.tokenAddress || address[0] || ""}
+        value={tokenInformation?.tokenAddress || address || ""}
         name={"tokenAddress"}
         label={"Token address"}
-        fullWidth
+        className="w-full"
       />
       {loading ? (
-          <div>
-            <Badge bg="secondary">Token Address Checking...</Badge>
-          </div>
-        ) : <s.TextIDWarning fullWidth>{tokenError["token"]}</s.TextIDWarning>
+        <div>
+          <Badge bg="secondary">Token Address Checking...</Badge>
+        </div>
+      ) : <p className="text-red-500 w-full"></p >
       }
-      {tokenInformation[0] && (
+      {tokenInformation && (
         <div>
           <p>Name</p>
-          <p>{tokenInformation[0].tokenName}</p>
+          <p>{tokenInformation.tokenName}</p>
           <p>Decimals</p>
-          <p>{tokenInformation[0].tokenDecimals}</p>
+          <p>{tokenInformation.tokenDecimals}</p>
           <p>Total supply</p>
           <p>
-            {BigNumber(tokenInformation[0].totalSupply)
-              .dividedBy(10 ** tokenInformation[0].tokenDecimals)
+            {BigNumber(tokenInformation.totalSupply)
+              .dividedBy(10 ** tokenInformation.tokenDecimals)
               .toFixed(0)}
           </p>
         </div>
@@ -64,3 +66,4 @@ export default function TokenVerify() {
     </div>
   );
 }
+export default TokenVerify
