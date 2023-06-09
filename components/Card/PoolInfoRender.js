@@ -1,8 +1,8 @@
-// import BigNumber from "bignumber.js";
+import BigNumber from "bignumber.js";
 import React from "react";
 // import { Badge } from "react-bootstrap";
 // import { ETHER } from "../../constants";
-// import { useApplicationContext } from "../../context/applicationContext";
+import { useApplicationContext } from "@/context/applicationContext";
 import { usePoolContext } from "@/context/poolContext";
 
 // import { getRouterName } from "../../utils/utils";
@@ -10,16 +10,14 @@ import { usePoolContext } from "@/context/poolContext";
 
 const PoolInfoRender = (props) => {
     const { idoAddress } = props;
-    console.log(idoAddress)
 
     const poolContext = usePoolContext();
 
     let idoInfo = poolContext.allPools[idoAddress];
-    console.log(idoInfo)
-    //   const {
-    //     baseCurrencySymbol
-    //   } = useApplicationContext();
-    const baseCurrencySymbol = "ETH"
+    const {
+        baseCurrencySymbol
+    } = useApplicationContext();
+   
 
     //   if (!utils.isValidPool(idoInfo)) {
     //     console.log(idoInfo);

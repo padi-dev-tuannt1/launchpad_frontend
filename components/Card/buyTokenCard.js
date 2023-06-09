@@ -9,26 +9,24 @@ import React, { useState } from "react";
 // import PoolCountdown from "../Utils/poolCountdown";
 import { useApplicationContext } from "@/context/applicationContext";
 import { usePoolContext } from "@/context/poolContext";
+import { useIDOPoolContract } from "@/hooks/useContract";
 import { ethers } from "ethers";
 import { web3 } from "web3"
 
 const BuyTokenCard = (props) => {
     // const { account, library } = useWeb3React();
-    // console.log(account)
-    console.log(ethers.utils)
+    const account ="0x0"
+ 
     const [ethAmount, setEthAmount] = useState("0");
     const [tokensToBuy, setTokensToBuy] = useState(0);
     const [loading, setLoading] = useState(false);
     const { idoAddress } = props;
-    //   const {
-    //     triggerUpdateAccountData,
-    //     baseCurrencySymbol
-    //   } = useApplicationContext();
-    const baseCurrencySymbol = "ETH"
+      const {
+        baseCurrencySymbol
+      } = useApplicationContext();
     const idoInfo = usePoolContext().allPools[idoAddress];
-    console.log(idoInfo)
 
-    //   const IDOPoolContract = useIDOPoolContract(idoAddress);
+      const IDOPoolContract = useIDOPoolContract(idoAddress);
 
     // if (!account) {
     //     return null;
@@ -43,73 +41,61 @@ const BuyTokenCard = (props) => {
     //     return <p>Loading</p>;
     // }
 
-    //   const buyToken = async () => {
-    //     setLoading(true); // TODO: add action loader to the appropriate button
-    //     try {
-    //       const tx = await IDOPoolContract.pay({
-    //         from: account,
-    //         value: `0x${ethAmount.toString(16)}`,
-    //       });
+      const buyToken = async () => {
+        setLoading(true); // TODO: add action loader to the appropriate button
+        try {
+          const tx = await IDOPoolContract.pay({
+            from: account,
+            value: `0x${ethAmount.toString(16)}`,
+          });
 
-    //       const receipt = await tx.wait();
+          const receipt = await tx.wait();
 
-    //       triggerUpdateAccountData();
-    //       // TODO: add trigger for update IDOInfo after actions
-    //       console.log("buyToken receipt", receipt);
-    //     } catch (err) {
-    //       console.log("buyToken Error: ", err);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   };
+          // TODO: add trigger for update IDOInfo after actions
+          console.log("buyToken receipt", receipt);
+        } catch (err) {
+          console.log("buyToken Error: ", err);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    //   const claimToken = async () => {
-    //     setLoading(true); // TODO: add action loader to the appropriate button
-    //     try {
-    //       const tx = await IDOPoolContract.claim({
-    //         from: account,
-    //       });
+      const claimToken = async () => {
+        setLoading(true); // TODO: add action loader to the appropriate button
+        try {
+          const tx = await IDOPoolContract.claim({
+            from: account,
+          });
 
-    //       const receipt = await tx.wait();
+          const receipt = await tx.wait();
 
-    //       triggerUpdateAccountData();
-    //       // TODO: add trigger for update IDOInfo after actions
-    //       console.log("claimToken receipt", receipt);
-    //     } catch (err) {
-    //       console.log("claimToken Error: ", err);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   };
+          // TODO: add trigger for update IDOInfo after actions
+          console.log("claimToken receipt", receipt);
+        } catch (err) {
+          console.log("claimToken Error: ", err);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    //   const refund = async () => {
-    //     setLoading(true); // TODO: add action loader to the appropriate button
-    //     try {
-    //       const tx = await IDOPoolContract.refund({
-    //         from: account,
-    //       });
+      const refund = async () => {
+        setLoading(true); // TODO: add action loader to the appropriate button
+        try {
+          const tx = await IDOPoolContract.refund({
+            from: account,
+          });
 
-    //       const receipt = await tx.wait();
+          const receipt = await tx.wait();
 
-    //       triggerUpdateAccountData();
-    //       // TODO: add trigger for update IDOInfo after actions
-    //       console.log("refund receipt", receipt);
-    //     } catch (err) {
-    //       console.log("refund Error: ", err);
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   };
-    const buyToken = async () => {
-
-    }
-    const claimToken = async () => {
-
-    }
-    const refund = async () => {
-
-    }
-
+          // TODO: add trigger for update IDOInfo after actions
+          console.log("refund receipt", receipt);
+        } catch (err) {
+          console.log("refund Error: ", err);
+        } finally {
+          setLoading(false);
+        }
+      };
+   
     const isStarted = parseInt(idoInfo.start) < (parseInt(Date.now() / 1000));
     const hasEnded = parseInt(idoInfo.end) < (parseInt(Date.now() / 1000));
     const reachSoftCap = BigNumber(idoInfo.totalInvestedETH).gte(BigNumber(idoInfo.softCap));
@@ -217,6 +203,7 @@ const BuyTokenCard = (props) => {
             <div>
                 <div flex={4} style={{ marginRight: 20 }}>
                     <input
+                        className="text-black"
                         value={tokensToBuy}
                         label={"Tokens amount"}
                         adornment={idoInfo.tokenSymbol}
@@ -255,14 +242,7 @@ const BuyTokenCard = (props) => {
                 </div>
             </div>
 
-            <div style={{ wordBreak: "break-all" }} >
-                <p>You will spend</p>
-                {/* {(ethAmount ? ethers.utils.formatUnits(ethAmount.toString(16)) : 0) +
-                    " " +
-                    baseCurrencySymbol
-                } */}
-                {ethAmount ? ethAmount : 0}
-            </div>
+          
         </div>
     );
 };
