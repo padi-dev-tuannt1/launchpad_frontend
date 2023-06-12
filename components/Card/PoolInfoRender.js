@@ -1,9 +1,10 @@
 import BigNumber from "bignumber.js";
 import React from "react";
 // import { Badge } from "react-bootstrap";
-// import { ETHER } from "../../constants";
+import { ETHER } from "@/constant";
 import { useApplicationContext } from "@/context/applicationContext";
 import { usePoolContext } from "@/context/poolContext";
+import { ethers } from "ethers";
 
 // import { getRouterName } from "../../utils/utils";
 // import TokenInfo from "./tokenInfo";
@@ -53,15 +54,14 @@ const PoolInfoRender = (props) => {
 
                 <div >
                     <p >Token rate</p>
-                    {/* {`${ETHER.div(idoInfo.tokenRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`} */}
-                    {`${(idoInfo.tokenRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
+                    {`${ETHER.div(idoInfo.tokenRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
+                   
                 </div>
 
                 {
                     isAddLiquidityEnabled && <div >
                         <p >Listing rate</p>
-                        {/* {`${ETHER.div(idoInfo.listingRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`} */}
-                        {`${(idoInfo.listingRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
+                        {`${ETHER.div(idoInfo.listingRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
                     </div>
                 }
 
@@ -69,33 +69,29 @@ const PoolInfoRender = (props) => {
                     <div style={{ padding: 0 }}>
                         <p>Soft Cap</p>
                         <p>
-                            {/* {BigNumber(library.web3.utils.fromWei(idoInfo.softCap)).toFormat(2) +
-                " " + baseCurrencySymbol} */}
-                            {idoInfo.softCap}
+                            {BigNumber(ethers.utils.formatEther(idoInfo.softCap)).toFormat(2) +
+                " " + baseCurrencySymbol}
+                           
                         </p>
                     </div>
                     <div style={{ padding: 0 }}>
                         <p>Hard Cap</p>
                         <p>
-                            {idoInfo.hardCap}
-                            {/* {BigNumber(library.web3.utils.fromWei(idoInfo.hardCap)).toFormat(2) +
-                " " + baseCurrencySymbol} */}
+                            {BigNumber(ethers.utils.formatEther(idoInfo.hardCap)).toFormat(2) +
+                " " + baseCurrencySymbol}
                         </p>
                     </div>
                     <div style={{ padding: 0 }}>
                         <p>Minimum Buy</p>
-                        <p>
-                            {/* {BigNumber(library.web3.utils.fromWei(idoInfo.min)).toFormat(2) +
-                " " + baseCurrencySymbol} */}
-                            {idoInfo.min}
+                        <p> {BigNumber(ethers.utils.formatEther(idoInfo.min)).toFormat(2) +
+                " " + baseCurrencySymbol}        
                         </p>
                     </div>
                     <div ai="center" style={{ padding: 0 }}>
                         <p>Maximum Buy</p>
                         <p>
-                            {/* {BigNumber(library.web3.utils.fromWei(idoInfo.max)).toFormat(2) +
-                " " + baseCurrencySymbol} */}
-                            {idoInfo.max}
+                        {BigNumber(ethers.utils.formatEther(idoInfo.max)).toFormat(2) +
+                " " + baseCurrencySymbol}
                         </p>
                     </div>
                 </div>

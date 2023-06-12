@@ -11,11 +11,14 @@ import { useApplicationContext } from "@/context/applicationContext";
 // import { isAddress } from "../../../../utils/utils";
 import { ETHER } from "@/constant";
 import { ethers } from "ethers";
+import { useWeb3React } from "@web3-react/core";
+import { useIDOFactoryContract } from "@/hooks/useContract";
 
 export default function Preview() {
+  const { account, chainId, library } = useWeb3React();
+ 
   const {
     baseCurrencySymbol,
-    IDOFactoryContract,
     IDOFactoryAddress,
     TokenLockerFactoryAddress,
     FeeTokenContract,
@@ -24,6 +27,9 @@ export default function Preview() {
     triggerUpdateAccountData,
     isFeeTokenDataFetching,
   } = useApplicationContext();
+  console.log(IDOFactoryAddress)
+  const IDOFactoryContract = useIDOFactoryContract(IDOFactoryAddress,true)
+  console.log(IDOFactoryContract)
   const router = useRouter();
 
   const {
@@ -381,7 +387,8 @@ export default function Preview() {
         )}
       </div>
 
-      {IDOFactoryFee && IDOFactoryFee !== "0" && `Create IDO fee : ${ethers.utils.parseUnits(IDOFactoryFee)} ${FeeTokenSymbol}`}
+      {IDOFactoryFee && IDOFactoryFee !== "0" && `Create IDO fee : ${ethers.utils.formatEther(IDOFactoryFee)}`}
+      {/* {IDOFactoryFee && IDOFactoryFee !== "0" && `Create IDO fee : ${ethers.utils.formatEther(IDOFactoryFee)} ${FeeTokenSymbol}`} */}
     </div>
   );
 }

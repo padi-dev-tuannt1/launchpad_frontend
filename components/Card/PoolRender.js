@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Countdown from "react-countdown";
 import Link from "next/link";
+import BigNumber from "bignumber.js";
+import { ethers } from "ethers";
 
 const PoolRender = (props) => {
   const [image, setImage] = useState("");
@@ -34,15 +36,17 @@ const PoolRender = (props) => {
           )}
         </div>
         <p>Description</p>
-        <p>{idoInfo.metadata.description}</p>
+        {/* <p>{idoInfo.metadata.description}</p> */}
         <div >
           <div >
             <p>Soft cap</p>
-            {idoInfo.softCap}
+            {BigNumber(ethers.utils.formatEther(idoInfo.softCap)).toFormat(2)
+            }
           </div>
           <div >
             <p>Hard cap</p>
-            {idoInfo.hardCap}
+            {BigNumber(ethers.utils.formatEther(idoInfo.hardCap)).toFormat(2)
+            }
           </div>
         </div>
         <p>

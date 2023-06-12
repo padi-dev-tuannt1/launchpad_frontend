@@ -23,7 +23,7 @@ const idoInformation = () => {
         If I pay 1 {baseCurrencySymbol} how much token I will get?
       </p>
       <input
-        className='mb-10'
+        className='mb-10 text-black'
         type='number'
         value={BigNumber(context.tokenRate[0]).toFixed()}
         placeholder='Token rate'
@@ -41,7 +41,7 @@ const idoInformation = () => {
       <div >
         <div flex={1} style={{ marginLeft: 10, marginRight: 10 }}>
           <input 
-            className='mb-10'
+            className='mb-10 text-black'
             type='number'
             value={BigNumber(context.softCap[0]).toFixed()}
             placeholder='Soft cap'
@@ -57,6 +57,7 @@ const idoInformation = () => {
           />
           <p className='text-red-500'>{context.idoError["softCap"]}</p>
           <input
+          className='text-black'
             type='number'
             value={BigNumber(context.hardCap[0]).toFixed()}
             placeholder='Hard cap'
@@ -81,7 +82,7 @@ const idoInformation = () => {
         </div>
         <div flex={1} style={{ marginLeft: 10, marginRight: 10 }}>
           <input
-            className='mb-10'
+            className='mb-10 text-black'
             type='number'
             value={BigNumber(context.minETH[0]).toFixed()}
             placeholder="Minimum Buy"
@@ -97,7 +98,7 @@ const idoInformation = () => {
           />
           <p className='text-red-500'>{context.idoError["minETH"]}</p>
           <input
-            className='mb-10'
+            className='mb-10 text-black'
             type='number'
             value={BigNumber(context.maxETH[0]).toFixed()}
             placeholder="Maximum Buy"
@@ -115,7 +116,7 @@ const idoInformation = () => {
           {
             isAddLiquidityEnabled && <>
               <input
-                className='mb-10' 
+                className='mb-10 text-black' 
                 type='number'
                 value={BigNumber(context.liquidityPercentage[0]).toFixed()}
                 placeholder="Liquidity % (51% - 100%)"
@@ -143,7 +144,7 @@ const idoInformation = () => {
             after presale?
           </p>
           <input
-            className='mb-10' 
+            className='mb-10 text-black' 
             type='number'
             value={BigNumber(context.listingRate[0]).toFixed()}
             placeholder="Listing Rate"
