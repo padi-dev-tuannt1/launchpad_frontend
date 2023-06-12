@@ -80,6 +80,7 @@ export const loadPoolData = async (idoPool) => {
     );
 
     let result = {
+      id: idoPool.id,
       tokenAddress: tokenAddress,
       // metadata: metadata,
       tokenName: tokenName,

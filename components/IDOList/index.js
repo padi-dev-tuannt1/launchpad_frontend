@@ -7,7 +7,6 @@ const IDOList = (props) => {
   const [loading, setLoading] = useState(false);
 
   const { allPools } = usePoolContext();
-  console.log(allPools)
 
   // sort IDOs by start time
   const poolKeys = Object.keys(allPools).sort((a, b) => allPools[b]?.start - allPools[a]?.start);

@@ -8,13 +8,14 @@ import IDOInfo from "./Step/idoInformation";
 import Preview from "./Step/preview";
 import ProjectInfo from "./Step/projectInfo";
 import TokenVerify from "./Step/tokenVerify";
+import { useWeb3React } from "@web3-react/core";
 
 function getSteps() {
   return ["Token verify", "IDO information", "Project information", "Submit"];
 }
 
 const PublishForm = () => {
-  const account = "0x"
+  const {account} = useWeb3React()
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   // const context = useStoreContext();

@@ -54,14 +54,14 @@ const PoolInfoRender = (props) => {
 
                 <div >
                     <p >Token rate</p>
-                    {`${ETHER.div(idoInfo.tokenRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
+                    {`${BigNumber(idoInfo.tokenRate).div(ETHER)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
                    
                 </div>
 
                 {
                     isAddLiquidityEnabled && <div >
                         <p >Listing rate</p>
-                        {`${ETHER.div(idoInfo.listingRate)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
+                        {`${BigNumber(idoInfo.listingRate).div(ETHER)} ${idoInfo.tokenSymbol}/${baseCurrencySymbol}`}
                     </div>
                 }
 
