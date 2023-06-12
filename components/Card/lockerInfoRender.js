@@ -4,12 +4,14 @@ import Countdown from "react-countdown";
 import { useApplicationContext } from "@/context/applicationContext";
 import { usePoolContext } from "@/context/poolContext";
 import { useLockerContract } from "@/hooks/useContract";
+import { useWeb3React } from "@web3-react/core";
 // import Loader from "../Loader";
 
 const LockerInfoRender = (props) => {
   const { lockerAddress } = props;
   const [loading, setLoading] = useState(false);
-  const account = "0x3421342"
+  const {library,account} = useWeb3React()
+  console.log(account)
   //   const {
   //     triggerUpdateAccountData,
   //   } = useApplicationContext();
@@ -29,13 +31,12 @@ const LockerInfoRender = (props) => {
       setLoading(true);
 
       try {
-        const tx = await LockerContract.withdrawTokenAll({
-          from: account,
-        });
+        const signer = LockerContract.connect(library.getSigner());
+        const tx = await signer.withdrawTokenAll();
 
         await tx.wait();
 
-        triggerUpdateAccountData();
+        // triggerUpdateAccountData();
         // TODO: add trigger for update lockerInfo after withdraw
       } catch (error) {
         console.log('locker withdraw Error', )

@@ -1,21 +1,13 @@
 
 import BigNumber from "bignumber.js";
 import React, { useState } from "react";
-// import { Badge } from "react-bootstrap";
-// import { useIDOPoolContract } from "../../hooks/useContract";
-// import { utils } from "../../utils";
-// import { NumberField } from "../FormField";
-// import ProgressBar from "../Modal/ProgressBar";
-// import PoolCountdown from "../Utils/poolCountdown";
 import { useApplicationContext } from "@/context/applicationContext";
 import { usePoolContext } from "@/context/poolContext";
 import { useIDOPoolContract } from "@/hooks/useContract";
-import { ethers } from "ethers";
-import { web3 } from "web3"
+import { useWeb3React } from "@web3-react/core";
 
 const BuyTokenCard = (props) => {
-    // const { account, library } = useWeb3React();
-    const account ="0x0"
+    const { account, library } = useWeb3React();
  
     const [ethAmount, setEthAmount] = useState("0");
     const [tokensToBuy, setTokensToBuy] = useState(0);
@@ -28,9 +20,9 @@ const BuyTokenCard = (props) => {
 
       const IDOPoolContract = useIDOPoolContract(idoAddress);
 
-    // if (!account) {
-    //     return null;
-    // }
+    if (!account) {
+        return null;
+    }
     // if (!utils.isValidPool(idoInfo)) {
     //     return null;
     // }
@@ -44,10 +36,8 @@ const BuyTokenCard = (props) => {
       const buyToken = async () => {
         setLoading(true); // TODO: add action loader to the appropriate button
         try {
-          const tx = await IDOPoolContract.pay({
-            from: account,
-            value: `0x${ethAmount.toString(16)}`,
-          });
+            const signer = IDOPoolContract.connect(library.getSigner());
+            const tx = await signer.pay({value: `0x${ethAmount.toString(16)}`});
 
           const receipt = await tx.wait();
 
@@ -63,9 +53,8 @@ const BuyTokenCard = (props) => {
       const claimToken = async () => {
         setLoading(true); // TODO: add action loader to the appropriate button
         try {
-          const tx = await IDOPoolContract.claim({
-            from: account,
-          });
+            const signer = IDOPoolContract.connect(library.getSigner());
+            const tx = await signer.claim();
 
           const receipt = await tx.wait();
 
@@ -81,9 +70,8 @@ const BuyTokenCard = (props) => {
       const refund = async () => {
         setLoading(true); // TODO: add action loader to the appropriate button
         try {
-          const tx = await IDOPoolContract.refund({
-            from: account,
-          });
+            const signer = IDOPoolContract.connect(library.getSigner());
+            const tx = await signer.refund();
 
           const receipt = await tx.wait();
 

@@ -7,8 +7,7 @@ import { useApplicationContext } from "@/context/applicationContext";
 import Link from "next/link";
 
 const Account = () => {
-  // const { account } = useWeb3React();
-  const account = "0x"
+  const { account } = useWeb3React();
   const [showZero, setShowZero] = useState(0);
 
   // const { domainSettings: { isLockerEnabled } } = useApplicationContext();
